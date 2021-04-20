@@ -93,7 +93,9 @@ rule token = parse
   | '%'                 { PERCENT }
   | '\n'                { LINEFEED(1,0) }
   | [ ' ' '\t' '\r' ]+  { IGNORE }
-  | "/*" ([^ '*'] | ('*'+ [^ '/']))* "*/"
+  | "/*!" { token lexbuf }
+  | "!*/" { IGNORE }
+  | "/*" [^ '!'] ([^ '*'] | ('*'+ [^ '/']))* "*/"
       { let s = Lexing.lexeme lexbuf in
 	let n = ref 0 in
 	let m = ref 0 in
