@@ -225,7 +225,7 @@ let simple_name_mapping dl =
     if not id.ocaml_name_requested then begin
       let n = ref ((if uc then get_uppercase else get_lowercase) id) in
       let renamed = ref false in
-      while List.mem (prefix !n) !ns || Hashtbl.mem reserved_table !n do
+      while (* List.mem (prefix !n) !ns || *) Hashtbl.mem reserved_table !n do
 	n := !n ^ "'";
 	renamed := true
       done;
